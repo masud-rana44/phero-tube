@@ -40,7 +40,9 @@
       </button>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-0">
+    <main
+      class="container flex flex-col mx-auto px-4 sm:px-0 min-h-[calc(100vh-105px-28px)]"
+    >
       <section
         id="tab-container"
         class="flex items-center gap-4 justify-center mt-7 mb-9"
@@ -48,12 +50,12 @@
 
       <section
         id="video-container"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-28"
       ></section>
 
       <section
         id="empty-container"
-        class="hidden w-full mx-auto items-center flex-col justify-center gap-8 max-w-[433px] h-[calc(100vh-600px) mb-28"
+        class="hidden flex-1 items-center flex-col justify-center gap-8 max-w-[433px] m-auto"
       >
         <img src="./img/icon.png" alt="Icon" />
         <h3

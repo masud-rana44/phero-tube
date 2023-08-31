@@ -56,6 +56,7 @@ function renderVideos(videos) {
     emptyContainer.classList.add("flex");
     emptyContainer.classList.remove("hidden");
     videoContainer.classList.remove("mb-28");
+    return;
   } else {
     emptyContainer.classList.remove("flex");
     emptyContainer.classList.add("hidden");
