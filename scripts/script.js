@@ -6,13 +6,14 @@ const btnSort = document.getElementById("btn-sort");
 let isSort = false;
 
 btnSort.addEventListener("click", () => {
-  const activeBtn = document.querySelector(".active");
+  const activeBtn = tabContainer.querySelector(".active");
   const activeId = activeBtn.getAttribute("id");
+
   fetchDataWithId(activeId, !isSort);
   isSort = !isSort;
 
-  // if (isSort) btnSort.classList.add("active");
-  // else btnSort.classList.remove("active");
+  if (isSort) btnSort.classList.add("active");
+  else btnSort.classList.remove("active");
 });
 
 function setBtnActive(btnId) {
@@ -49,7 +50,8 @@ function renderTab(allCategory) {
       "px-4",
       "border-none",
       "focus-visible:outline-none",
-      "bg-[#252525]/20",
+      "bg-[#19191933]",
+      "hover:bg-[#19191928]",
       "transition",
       "text-[16px]",
       "font-medium",
@@ -131,6 +133,7 @@ async function fetchDataWithId(id, isSorted = false) {
     );
     const data = await res.json();
 
+    btnSort.disabled = !data.data.length ? true : false;
     const videosData = isSorted ? handleSort(data.data) : data.data;
 
     renderVideos(videosData);
