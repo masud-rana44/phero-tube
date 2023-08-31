@@ -71,6 +71,14 @@ function renderTab(allCategory) {
   handleTabEvent();
 }
 
+function calcPostTime(seconds) {
+  const totalMin = Number(seconds / 60);
+  const hours = Math.floor(totalMin / 60);
+  const min = Math.floor(totalMin - hours * 60);
+
+  return `${hours}hrs ${min} min ago`;
+}
+
 function renderVideos(videos) {
   videoContainer.innerHTML = "";
 
@@ -85,20 +93,28 @@ function renderVideos(videos) {
     videoContainer.classList.add("mb-28");
   }
 
-  videos.forEach(function (video) {
+  videos.forEach((video) => {
     const card = document.createElement("div");
     card.innerHTML = `
-        <header class="rounded-lg overflow-hidden">
+        <header class="relative rounded-lg overflow-hidden">
             <img
               class="h-[200px] w-full"
               src=${video.thumbnail}
               alt="thumbnail"
             />
+            ${
+              video.others?.posted_date &&
+              `<div class="absolute bottom-3 right-3 bg-[#171717] rounded-[4px] py-1 px-[5px] z-10">
+              <p class="text-[10px] text-white">${calcPostTime(
+                video.others.posted_date
+              )}</p>
+            </div>`
+            }
           </header>
           <div class="flex gap-3 mt-5">
             <img
               class="w-10 h-10 rounded-full object-cover"
-              src=${video.authors[0].profile_picture}
+              src=${video.authors[0]?.profile_picture}
               alt="User image"
             />
             <div class="flex flex-col gap-2">
@@ -107,15 +123,15 @@ function renderVideos(videos) {
               </h2>
               <div class="flex items-center gap-2">
                 <p class="text-sm text-[#171717B2]/70">${
-                  video.authors[0].profile_name
+                  video.authors[0]?.profile_name
                 }</p>
                 ${
-                  video.authors[0].verified
+                  video.authors[0]?.verified
                     ? '<img src="./img/tick.svg" alt="verified icon" />'
                     : ""
                 }
               </div>
-              <p class="text-sm text-[#171717B2]/70">${video.others.views}</p>
+              <p class="text-sm text-[#171717B2]/70">${video.others?.views}</p>
             </div>
           </div>
   `;
