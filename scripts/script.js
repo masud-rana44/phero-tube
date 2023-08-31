@@ -1,33 +1,43 @@
-const container = document.getElementById("video-container");
+const videoContainer = document.getElementById("video-container");
 const tabContainer = document.getElementById("tab-container");
 
-const renderTab = (allCategory) => {
-  console.log(allCategory);
-  allCategory.forEach((category) => {
+function renderTab(allCategory) {
+  tabContainer.innerHTML = "";
+
+  allCategory.forEach(function (category) {
     const button = document.createElement("button");
+    button.setAttribute("id", category.category_id);
     button.classList.add(
-      "py-2 px-4 border-none focus-visible:outline-none bg-[#252525]/20 hover:bg-[#252525]/25 transition text-[16px] font-medium rounded-[4px]"
+      "btnTab",
+      "py-2",
+      "px-4",
+      "border-none",
+      "focus-visible:outline-none",
+      "bg-[#252525]/20",
+      "hover:bg-[#252525]/25",
+      "transition",
+      "text-[16px]",
+      "font-medium",
+      "rounded-[4px]"
     );
     button.innerText = category.category;
 
     tabContainer.appendChild(button);
   });
-};
 
-const fetchData = async (id) => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/videos/category/${id}`
-  );
-  const data = await res.json();
+  const btnsTab = document.querySelectorAll(".btnTab");
+  console.log(btnsTab);
+}
 
-  data.data.forEach((video) => {
-    console.log(video);
+function renderVideo(videos) {
+  videoContainer.innerHTML = "";
+
+  videos.forEach(function (video) {
     const card = document.createElement("div");
-
     card.innerHTML = `
         <header class="rounded-lg overflow-hidden">
             <img
-              class="h-[200px] w-full object-cover"
+              class="h-[200px] w-full"
               src=${video.thumbnail}
               alt="thumbnail"
             />
@@ -57,27 +67,39 @@ const fetchData = async (id) => {
           </div>
   `;
 
-    container.appendChild(card);
+    videoContainer.appendChild(card);
   });
-};
+}
 
-const fetchCategoryData = async () => {
+async function fetchDataWithId(id) {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/videos/category/${id}`
+  );
+  const data = await res.json();
+
+  renderVideo(data.data);
+}
+
+async function fetchCategoryData() {
   try {
     const res = await fetch(
       "https://openapi.programming-hero.com/api/videos/categories"
     );
     const data = await res.json();
 
-    // data.data.forEach((category) => fetchData(category.category_id));
+    // data.data.forEach(function(category) {
+    //   fetchDataWithId(category.category_id);
+    // });
     renderTab(data.data);
 
-    const categoryAll = data.data.find(
-      (category) => category.category === "All"
-    ).category_id;
+    const categoryAll = data.data.find(function (category) {
+      return category.category === "All";
+    }).category_id;
 
-    fetchData(categoryAll);
+    fetchDataWithId(categoryAll);
   } catch (error) {
     console.log("💥ERROR:", error);
   }
-};
+}
+
 fetchCategoryData();
