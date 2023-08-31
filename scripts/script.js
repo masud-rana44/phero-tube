@@ -1,6 +1,20 @@
 const videoContainer = document.getElementById("video-container");
 const tabContainer = document.getElementById("tab-container");
 
+function handleTabEvent() {
+  const btns = document.querySelectorAll(".btnTab");
+  btns.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      // remove the class
+      btns.forEach((b) => b.classList.remove("bg-[#FF1F3D]", "text-white"));
+
+      btn.classList.add("bg-[#FF1F3D]", "text-white");
+      const id = btn.getAttribute("id");
+      fetchDataWithId(id);
+    })
+  );
+}
+
 function renderTab(allCategory) {
   tabContainer.innerHTML = "";
 
@@ -14,7 +28,6 @@ function renderTab(allCategory) {
       "border-none",
       "focus-visible:outline-none",
       "bg-[#252525]/20",
-      "hover:bg-[#252525]/25",
       "transition",
       "text-[16px]",
       "font-medium",
@@ -25,8 +38,7 @@ function renderTab(allCategory) {
     tabContainer.appendChild(button);
   });
 
-  const btnsTab = document.querySelectorAll(".btnTab");
-  console.log(btnsTab);
+  handleTabEvent();
 }
 
 function renderVideo(videos) {
@@ -72,12 +84,16 @@ function renderVideo(videos) {
 }
 
 async function fetchDataWithId(id) {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/videos/category/${id}`
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/videos/category/${id}`
+    );
+    const data = await res.json();
 
-  renderVideo(data.data);
+    renderVideo(data.data);
+  } catch (error) {
+    console.log("💥ERROR:", error);
+  }
 }
 
 async function fetchCategoryData() {
@@ -87,19 +103,9 @@ async function fetchCategoryData() {
     );
     const data = await res.json();
 
-    // data.data.forEach(function(category) {
-    //   fetchDataWithId(category.category_id);
-    // });
     renderTab(data.data);
-
-    const categoryAll = data.data.find(function (category) {
-      return category.category === "All";
-    }).category_id;
-
-    fetchDataWithId(categoryAll);
   } catch (error) {
     console.log("💥ERROR:", error);
   }
 }
-
 fetchCategoryData();
