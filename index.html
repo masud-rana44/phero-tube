@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔴</text></svg>"
+    />
+
     <!-- font-inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,13 +34,18 @@
       .active:hover {
         opacity: 70%;
       }
+      .active:disabled {
+        opacity: 100%;
+      }
     </style>
   </head>
   <body class="font-inter">
     <header
-      class="container mx-auto flex items-center justify-between py-8 border-b border-[#171717]/20 px-4 sm:px-0"
+      class="container mx-auto flex flex-wrap gap-4 sm:gap-0 items-center justify-between py-8 px-6 sm:px-0 border-b border-b-[#17171720]"
     >
-      <img src="img/Logo.png" alt="PHero Tube logo" />
+      <div class="w-full sm:w-auto">
+        <img class="mx-auto" src="img/Logo.png" alt="PHero Tube logo" />
+      </div>
       <button
         id="btn-sort"
         class="py-2 px-4 border-none focus-visible:outline-none bg-[#19191933]/20 hover:bg-[#19191928] transition text-[16px] font-medium rounded-[4px] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-[#19191933]"
@@ -54,7 +65,7 @@
     >
       <section
         id="tab-container"
-        class="flex items-center gap-4 justify-center mt-7 mb-9"
+        class="flex flex-wrap items-center gap-4 justify-center mt-7 mb-9"
       ></section>
 
       <section

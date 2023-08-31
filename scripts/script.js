@@ -21,8 +21,13 @@ function setBtnActive(btnId) {
   btns.forEach((btn) => {
     const categoryId = btn.getAttribute("id");
 
-    if (categoryId === btnId) btn.classList.add("active");
-    else btn.classList.remove("active");
+    if (categoryId === btnId) {
+      btn.classList.add("active");
+      btn.disabled = true;
+    } else {
+      btn.classList.remove("active");
+      btn.disabled = false;
+    }
   });
 }
 
@@ -55,7 +60,8 @@ function renderTab(allCategory) {
       "transition",
       "text-[16px]",
       "font-medium",
-      "rounded-[4px]"
+      "rounded-[4px]",
+      "disabled:cursor-not-allowed"
     );
     button.innerText = category.category;
 

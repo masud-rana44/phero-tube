@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Page</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔴</text></svg>"
+    />
+    <title>PHero Blog Page</title>
 
     <style>
       .font-inter {
@@ -17,7 +21,7 @@
 
   <body class="font-inter">
     <header
-      class="container mx-auto flex items-center justify-between py-8 border-b border-[#171717]/20 px-4 sm:px-0"
+      class="container mx-auto flex flex-wrap gap-4 items-center justify-between py-8 border-b border-[#171717]/20 px-4 sm:px-0"
     >
       <img src="img/Logo.png" alt="PHero Tube logo" />
       <a
@@ -28,8 +32,8 @@
       </a>
     </header>
 
-    <main class="container min-h-screen mx-auto p-6 rounded-md">
-      <h1 class="text-3xl font-semibold mb-4">Questions</h1>
+    <main class="container min-h-[cacl(100vh-105px)] mx-auto p-6 rounded-md">
+      <h1 class="text-3xl font-semibold mb-4">PHero Blog</h1>
 
       <div class="max-w-4xl">
         <!-- Question 1 -->
@@ -38,8 +42,16 @@
             1. Discuss the scope of var, let, and const
           </h2>
           <p class="text-gray-600">
-            In JavaScript, var, let, and const are used for declaring variables.
-            Their scopes are different:
+            In JavaScript, users can declare a variable using 3 keywords that
+            are var, let, and const. In this article, we will see the
+            differences between the var, let, and const keywords. We will
+            discuss the scope and other required concepts about each keyword.
+            JavaScript var keyword: The var is the oldest keyword to declare a
+            variable in JavaScript. Scope: Global scoped or function scoped. The
+            scope of the var keyword is the global or function scope. It means
+            variables defined outside the function can be accessed globally, and
+            variables defined inside a particular function can be accessed
+            within the function.
           </p>
           <ul class="ml-6 list-disc">
             <li>
