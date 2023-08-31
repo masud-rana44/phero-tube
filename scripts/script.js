@@ -10,6 +10,9 @@ btnSort.addEventListener("click", () => {
   const activeId = activeBtn.getAttribute("id");
   fetchDataWithId(activeId, !isSort);
   isSort = !isSort;
+
+  // if (isSort) btnSort.classList.add("active");
+  // else btnSort.classList.remove("active");
 });
 
 function setBtnActive(btnId) {
@@ -17,9 +20,8 @@ function setBtnActive(btnId) {
   btns.forEach((btn) => {
     const categoryId = btn.getAttribute("id");
 
-    if (categoryId === btnId)
-      btn.classList.add("active", "bg-[#FF1F3D]", "text-white");
-    else btn.classList.remove("active", "bg-[#FF1F3D]", "text-white");
+    if (categoryId === btnId) btn.classList.add("active");
+    else btn.classList.remove("active");
   });
 }
 
@@ -77,7 +79,6 @@ function renderVideos(videos) {
 
   videos.forEach(function (video) {
     const card = document.createElement("div");
-    // card.classList.add("max-w-[350px]", "self-center");
     card.innerHTML = `
         <header class="rounded-lg overflow-hidden">
             <img
