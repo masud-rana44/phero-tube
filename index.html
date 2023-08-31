@@ -4,12 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- font-inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>PHero Tube</title>
+
+    <style>
+      .font-inter {
+        font-family: "Inter", sans-serif;
+      }
+      .btn-grey {
+        @apply capitalize py-2 px-4 border-none focus-visible:outline-none bg-[#252525]/20 text-[16px] font-medium rounded-[4px];
+      }
+    </style>
   </head>
-  <body>
+  <body class="font-inter">
+    <header
+      class="container mx-auto flex items-center justify-between py-8 border-b border-[#17171733]/20"
+    >
+      <img src="img/Logo.png" alt="PHero Tube logo" />
+      <button
+        class="py-2 px-4 border-none focus-visible:outline-none bg-[#252525]/20 hover:bg-[#252525]/25 transition text-[16px] font-medium rounded-[4px]"
+      >
+        Sort by view
+      </button>
+      <button
+        class="py-2 px-4 border-none focus-visible:outline-none bg-[#FF1F3D] hover:bg-[#FF1F3D]/90 text-white transition text-[16px] font-medium rounded-[4px]"
+      >
+        Blog
+      </button>
+    </header>
     <script src="scripts/script.js"></script>
   </body>
 </html>
