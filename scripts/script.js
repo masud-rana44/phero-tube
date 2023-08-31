@@ -1,15 +1,23 @@
 const videoContainer = document.getElementById("video-container");
 const tabContainer = document.getElementById("tab-container");
+const emptyContainer = document.getElementById("empty-container");
+
+function setBtnActive(btnId) {
+  const btns = document.querySelectorAll(".btnTab");
+  btns.forEach((btn) => {
+    const categoryId = btn.getAttribute("id");
+
+    if (categoryId === btnId) btn.classList.add("bg-[#FF1F3D]", "text-white");
+    else btn.classList.remove("bg-[#FF1F3D]", "text-white");
+  });
+}
 
 function handleTabEvent() {
   const btns = document.querySelectorAll(".btnTab");
   btns.forEach((btn) =>
     btn.addEventListener("click", () => {
-      // remove the class
-      btns.forEach((b) => b.classList.remove("bg-[#FF1F3D]", "text-white"));
-
-      btn.classList.add("bg-[#FF1F3D]", "text-white");
       const id = btn.getAttribute("id");
+      setBtnActive(id);
       fetchDataWithId(id);
     })
   );
@@ -41,8 +49,18 @@ function renderTab(allCategory) {
   handleTabEvent();
 }
 
-function renderVideo(videos) {
+function renderVideos(videos) {
   videoContainer.innerHTML = "";
+
+  if (!videos.length) {
+    emptyContainer.classList.add("flex");
+    emptyContainer.classList.remove("hidden");
+    videoContainer.classList.remove("mb-28");
+  } else {
+    emptyContainer.classList.remove("flex");
+    emptyContainer.classList.add("hidden");
+    videoContainer.classList.add("mb-28");
+  }
 
   videos.forEach(function (video) {
     const card = document.createElement("div");
@@ -90,10 +108,18 @@ async function fetchDataWithId(id) {
     );
     const data = await res.json();
 
-    renderVideo(data.data);
+    renderVideos(data.data);
   } catch (error) {
     console.log("💥ERROR:", error);
   }
+}
+
+function fetchInitialData(categories, categoryName) {
+  const id = categories.find(
+    (cat) => cat.category === categoryName
+  ).category_id;
+  fetchDataWithId(id);
+  setBtnActive(id);
 }
 
 async function fetchCategoryData() {
@@ -104,6 +130,7 @@ async function fetchCategoryData() {
     const data = await res.json();
 
     renderTab(data.data);
+    fetchInitialData(data.data, "All");
   } catch (error) {
     console.log("💥ERROR:", error);
   }
