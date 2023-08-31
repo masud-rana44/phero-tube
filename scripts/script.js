@@ -77,6 +77,7 @@ function renderVideos(videos) {
 
   videos.forEach(function (video) {
     const card = document.createElement("div");
+    // card.classList.add("max-w-[350px]", "self-center");
     card.innerHTML = `
         <header class="rounded-lg overflow-hidden">
             <img
