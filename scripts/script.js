@@ -1,14 +1,25 @@
 const videoContainer = document.getElementById("video-container");
 const tabContainer = document.getElementById("tab-container");
 const emptyContainer = document.getElementById("empty-container");
+const btnSort = document.getElementById("btn-sort");
+
+let isSort = false;
+
+btnSort.addEventListener("click", () => {
+  const activeBtn = document.querySelector(".active");
+  const activeId = activeBtn.getAttribute("id");
+  fetchDataWithId(activeId, !isSort);
+  isSort = !isSort;
+});
 
 function setBtnActive(btnId) {
   const btns = document.querySelectorAll(".btnTab");
   btns.forEach((btn) => {
     const categoryId = btn.getAttribute("id");
 
-    if (categoryId === btnId) btn.classList.add("bg-[#FF1F3D]", "text-white");
-    else btn.classList.remove("bg-[#FF1F3D]", "text-white");
+    if (categoryId === btnId)
+      btn.classList.add("active", "bg-[#FF1F3D]", "text-white");
+    else btn.classList.remove("active", "bg-[#FF1F3D]", "text-white");
   });
 }
 
@@ -19,6 +30,7 @@ function handleTabEvent() {
       const id = btn.getAttribute("id");
       setBtnActive(id);
       fetchDataWithId(id);
+      isSort = false;
     })
   );
 }
@@ -102,14 +114,24 @@ function renderVideos(videos) {
   });
 }
 
-async function fetchDataWithId(id) {
+function handleSort(data) {
+  return data.sort((a, b) => {
+    const views1 = parseFloat(a.others.views);
+    const views2 = parseFloat(b.others.views);
+    return views2 - views1;
+  });
+}
+
+async function fetchDataWithId(id, isSorted = false) {
   try {
     const res = await fetch(
       `https://openapi.programming-hero.com/api/videos/category/${id}`
     );
     const data = await res.json();
 
-    renderVideos(data.data);
+    const videosData = isSorted ? handleSort(data.data) : data.data;
+
+    renderVideos(videosData);
   } catch (error) {
     console.log("💥ERROR:", error);
   }
