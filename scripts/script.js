@@ -1,4 +1,18 @@
 const container = document.getElementById("video-container");
+const tabContainer = document.getElementById("tab-container");
+
+const renderTab = (allCategory) => {
+  console.log(allCategory);
+  allCategory.forEach((category) => {
+    const button = document.createElement("button");
+    button.classList.add(
+      "py-2 px-4 border-none focus-visible:outline-none bg-[#252525]/20 hover:bg-[#252525]/25 transition text-[16px] font-medium rounded-[4px]"
+    );
+    button.innerText = category.category;
+
+    tabContainer.appendChild(button);
+  });
+};
 
 const fetchData = async (id) => {
   const res = await fetch(
@@ -13,13 +27,14 @@ const fetchData = async (id) => {
     card.innerHTML = `
         <header class="rounded-lg overflow-hidden">
             <img
+              class="h-[200px] w-full object-cover"
               src=${video.thumbnail}
               alt="thumbnail"
             />
           </header>
           <div class="flex gap-3 mt-5">
             <img
-              class="w-10 h-10 rounded-full"
+              class="w-10 h-10 rounded-full object-cover"
               src=${video.authors[0].profile_picture}
               alt="User image"
             />
@@ -46,7 +61,7 @@ const fetchData = async (id) => {
   });
 };
 
-const fetchCategory = async () => {
+const fetchCategoryData = async () => {
   try {
     const res = await fetch(
       "https://openapi.programming-hero.com/api/videos/categories"
@@ -54,6 +69,8 @@ const fetchCategory = async () => {
     const data = await res.json();
 
     // data.data.forEach((category) => fetchData(category.category_id));
+    renderTab(data.data);
+
     const categoryAll = data.data.find(
       (category) => category.category === "All"
     ).category_id;
@@ -63,4 +80,4 @@ const fetchCategory = async () => {
     console.log("💥ERROR:", error);
   }
 };
-fetchCategory();
+fetchCategoryData();
