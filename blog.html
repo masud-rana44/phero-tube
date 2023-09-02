@@ -21,9 +21,11 @@
 
   <body class="font-inter">
     <header
-      class="container mx-auto flex flex-wrap gap-4 items-center justify-between py-8 border-b border-[#171717]/20 px-4 sm:px-0"
+      class="container mx-auto flex flex-wrap gap-4 items-center justify-between py-8 border-b border-[#171717]/20 px-6 sm:px-4 lg:0"
     >
-      <img src="img/Logo.png" alt="PHero Tube logo" />
+      <h1 class="text-3xl font-bold mb-4">
+        <span class="text-[#FF1F3D]">PH</span> Blog
+      </h1>
       <a
         href="./index.html"
         class="md:ml-32 py-2 px-4 border-none focus-visible:outline-none bg-[#FF1F3D] hover:bg-[#FF1F3D]/70 text-white transition text-[16px] font-medium rounded-[4px]"
@@ -32,15 +34,36 @@
       </a>
     </header>
 
-    <main class="container min-h-[cacl(100vh-105px)] mx-auto p-6 rounded-md">
-      <h1 class="text-3xl font-semibold mb-4">PHero Blog</h1>
+    <main
+      class="container min-h-[cacl(100vh-105px)] mx-auto px-6 sm:px-4 lg:0 rounded-md"
+    >
+      <div class="p-4 rounded-lg">
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0">
+            <img
+              src="./img/author.jpg"
+              alt="Author"
+              class="w-12 h-12 rounded-full"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Masud Rana</h3>
+            <div class="flex gap-2 items-center">
+              <p class="text-gray-500 text-sm">masud@example.com</p>
+              <span class="text-gray-500 text-sm">-</span>
+              <p class="text-gray-500 text-sm">Sep 01, 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div class="max-w-4xl">
+      <div class="max-w-4xl p-4 space-y-10">
         <!-- Question 1 -->
         <div class="mb-4">
-          <h2 class="text-lg font-medium">
+          <h2 class="text-xl font-medium">
             1. Discuss the scope of var, let, and const
           </h2>
+
           <p class="text-gray-600">
             In JavaScript, users can declare a variable using 3 keywords that
             are var, let, and const. In this article, we will see the
@@ -53,7 +76,7 @@
             variables defined inside a particular function can be accessed
             within the function.
           </p>
-          <ul class="ml-6 list-disc">
+          <ul class="ml-6 list-disc pt-4 text-gray-600">
             <li>
               <strong>var:</strong> Function-scoped. Variables declared with var
               are hoisted to the top of their function or global context.
@@ -71,7 +94,7 @@
 
         <!-- Question 2 -->
         <div class="mb-4">
-          <h2 class="text-lg font-medium">
+          <h2 class="text-xl font-medium">
             2. Tell us the use cases of null and undefined
           </h2>
           <p class="text-gray-600">
@@ -88,7 +111,7 @@
 
         <!-- Question 3 -->
         <div>
-          <h2 class="text-lg font-medium">3. What do you mean by REST API?</h2>
+          <h2 class="text-xl font-medium">3. What do you mean by REST API?</h2>
           <p class="text-gray-600">
             A REST API (Representational State Transfer Application Programming
             Interface) is a set of rules and conventions for building and
