@@ -36,8 +36,11 @@ function handleTabEvent() {
   btns.forEach((btn) =>
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("id");
+
+      btnSort.classList.remove("active");
       setBtnActive(id);
       fetchDataWithId(id);
+
       isSort = false;
     })
   );
